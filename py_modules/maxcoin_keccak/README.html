@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>pysha3</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7056 2011-06-17 10:50:48Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="pysha3">
+<h1 class="title">pysha3</h1>
+
+<p>SHA-3 wrapper (keccak) for Python. The package is a wrapper around the
+optimized reference implementation from <a class="reference external" href="http://keccak.noekeon.org/">http://keccak.noekeon.org/</a> . Only
+the optimizations for 32 and 64bit platforms are used. The optimized SSE and
+ARM assembly variants are ignored for now.</p>
+<p>The module is a standalone version of my SHA-3 module from Python 3.4
+(currently under development). The code in sha3module.c has been modified to
+be compatible with Python 2.6 to 3.4. Python 2.5 and earlier are not
+supported.</p>
+<div class="section" id="platforms">
+<h1>Platforms</h1>
+<p>pysha3 has been successfully tested on at least 8 CPU architectures, 7 compiler
+families and 10 operating systems families:</p>
+<blockquote>
+<ul class="simple">
+<li>Linux (GCC 4.3 and 4.6, clang 3.0) on X86, X86_64 and ARMv6 (little endian)</li>
+<li>Windows (VS 2008, VS 2010) on X86 and X86_64</li>
+<li>FreeBSD 7.4 - 10 (GCC, clang) on X86 and X86_64</li>
+<li>NetBSD 5.1 (GCC) on X86 and X86_64</li>
+<li>Mac OS X 10.8 (clang4) on X86_64</li>
+<li>HP-UX (HP C/aC++) on IA64 (little endian) and PA-RISC (big endian)</li>
+<li>Solaris 10 (Oracle Solaris Studio 12.3) on SPARC (big endian)</li>
+<li>Solaris 11 (Oracle Solaris Studio 12.3) on X86_64.</li>
+<li>AIX (XLC 12.1) on PowerPC (big endian)</li>
+<li>Tru64 (Compaq C) on Alpha (little endian)</li>
+</ul>
+</blockquote>
+<p>Thank you very much to Trent Nelson for <a class="reference external" href="http://www.snakebite.net/">http://www.snakebite.net/</a> .</p>
+<div class="section" id="donation-for-armv7-support">
+<h2>Donation for ARMv7 support</h2>
+<p>The Keccak reference implementation contains optimized assembly code for ARM.
+However neither Trent nor I have access to ARM platforms except for my 1st
+generation Raspberry Pi. We gladly accept hardware donations of ARM boards
+and periphery, either to the Snakebite network or to me personally. Please
+contact me if you like to help.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage</h1>
+<p>The <cite>sha3</cite> module contains several constructors for hash objects with a
+PEP 247 compatible interface. The module provides <cite>sha3_228()</cite>, <cite>sha3_256()</cite>,
+<cite>sha3_384()</cite>, and <cite>sha3_512()</cite>.</p>
+<p>The <cite>sha3</cite> module monkey patches the <cite>hashlib</cite> module . The monkey patch is
+automatically activated with the first import of the <cite>sha3</cite> module. The
+<cite>hashlib</cite> module of Python 3.4 will support the four SHA-3 algorithms
+on all platforms. Therefore you shouldn't use the sha3 module directly
+and rather go through the <cite>hashlib</cite> interface:</p>
+<pre class="literal-block">
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; import hashlib
+&gt;&gt;&gt; if sys.version_info &lt; (3, 4):
+...    import sha3
+&gt;&gt;&gt; s = hashlib.new(&quot;sha3_512&quot;)
+&gt;&gt;&gt; s = hashlib.sha3_512() # alternative
+&gt;&gt;&gt; s.name
+'sha3_512'
+&gt;&gt;&gt; s.digest_size
+64
+&gt;&gt;&gt; s.update(b&quot;data&quot;)
+&gt;&gt;&gt; s.hexdigest()
+'1065aceeded3a5e4412e2187e919bffeadf815f5bd73d37fe00d384fe29f55f08462fdabe1007b993ce5b8119630e7db93101d9425d6e352e22ffe3dcb56b825'
+</pre>
+<p><strong>Don't use SHA-3 for HMAC!</strong> HMAC hasn't been specified for SHA-3 yet and no
+test vectors are available, too.</p>
+</div>
+<div class="section" id="comments-from-sha3module-header">
+<h1>Comments from sha3module header</h1>
+<p>The code is based on KeccakReferenceAndOptimized-3.2.zip from 29 May 2012.</p>
+<dl class="docutils">
+<dt>The reference implementation is altered in this points:</dt>
+<dd><ul class="first last simple">
+<li>C++ comments are converted to ANSI C comments.</li>
+<li>All functions and globals are declared static.</li>
+<li>The typedef for UINT64 is commented out.</li>
+<li>brg_endian.h is removed.</li>
+<li>KeccakF-1600-opt[32|64]-settings.h are commented out</li>
+<li>Some unused functions are commented out to silence compiler warnings.</li>
+</ul>
+</dd>
+</dl>
+<p>In order to avoid name clashes with other software I have to declare all
+Keccak functions and global data as static. The C code is directly
+included into this file in order to access the static functions.</p>
+<p>Keccak can be tuned with several paramenters. I try to explain all options
+as far as I understand them. The reference implementation also contains
+assembler code for ARM platforms (NEON instructions).</p>
+<div class="section" id="common">
+<h2>Common</h2>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Unrolling</cite></dt>
+<dd>loop unrolling (24, 12, 8, 6, 4, 3, 2, 1)</dd>
+<dt><cite>UseBebigokimisa</cite></dt>
+<dd>lane complementing</dd>
+</dl>
+</blockquote>
+</div>
+<div class="section" id="bit-platforms">
+<h2>64bit platforms</h2>
+<p>default settings of common options</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Unrolling</cite></dt>
+<dd>24</dd>
+<dt><cite>UseBebigokimisa</cite></dt>
+<dd>enabled</dd>
+</dl>
+</blockquote>
+<p>Additional optimiation instructions (disabled by default):</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>UseSSE</cite></dt>
+<dd><p class="first">use Stream SIMD extensions</p>
+<dl class="last docutils">
+<dt><cite>UseOnlySIMD64</cite></dt>
+<dd>limit to 64bit instructions, otherwise 128bit</dd>
+<dt><cite>w/o UseOnlySIMD64</cite></dt>
+<dd>requires compiler argument <cite>-mssse3</cite> or <cite>-mtune=core2</cite> or better</dd>
+</dl>
+</dd>
+<dt><cite>UseMMX</cite></dt>
+<dd>use 64bit MMX instructions</dd>
+<dt><cite>UseXOP</cite></dt>
+<dd>use AMD's eXtended Operations (128bit SSE extension)</dd>
+</dl>
+</blockquote>
+<p>When neither <cite>UseSSE</cite>, <cite>UseMMX</cite> nor <cite>UseXOP</cite> is configured, <cite>ROL64</cite>
+(rotate left 64) is implemented as:</p>
+<blockquote>
+<dl class="docutils">
+<dt>Windows</dt>
+<dd>_rotl64()</dd>
+<dt><cite>UseSHLD</cite></dt>
+<dd>use shld (shift left) asm optimization</dd>
+<dt>otherwise</dt>
+<dd>shift and xor</dd>
+</dl>
+</blockquote>
+<p><cite>UseBebigokimisa</cite> can't be used in combination with <cite>UseSSE</cite>, <cite>UseMMX</cite> or
+<cite>UseXOP</cite>. <cite>UseOnlySIMD64</cite> has no effect unless UseSSE is specified.</p>
+<p>Tests have shown that <cite>UseSSE</cite> + <cite>UseOnlySIMD64</cite> is about three to four
+times SLOWER than <cite>UseBebigokimisa</cite>. <cite>UseSSE</cite> and <cite>UseMMX</cite> are about two
+times slower. (tested by CH and AP)</p>
+</div>
+<div class="section" id="id1">
+<h2>32bit platforms</h2>
+<p>default settings of common options</p>
+<blockquote>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Unrolling</cite></dt>
+<dd>2</dd>
+<dt><cite>UseBebigokimisa</cite></dt>
+<dd>disabled</dd>
+</dl>
+</blockquote>
+<dl class="docutils">
+<dt><cite>UseSchedule</cite></dt>
+<dd><blockquote class="first">
+<dl class="docutils">
+<dt><cite>1</cite></dt>
+<dd>unknown</dd>
+<dt><cite>2</cite></dt>
+<dd>unknown</dd>
+<dt><cite>3</cite> [default]</dt>
+<dd>unknown, no <cite>UseBebigokimisa</cite>, <cite>Unrolling</cite> must be 2</dd>
+</dl>
+</blockquote>
+<dl class="last docutils">
+<dt><cite>UseInterleaveTables</cite></dt>
+<dd>use two 64k lookup tables for (de)interleaving (disabled by default)</dd>
+</dl>
+</dd>
+</dl>
+</blockquote>
+</div>
+</div>
+<div class="section" id="changelog">
+<h1>Changelog</h1>
+<div class="section" id="pysha3-0-4">
+<h2>pysha3 0.4</h2>
+<p><em>Release date: ??-???-2012</em></p>
+<ul class="simple">
+<li>Fix typo that disabled threading optimization.</li>
+<li>Add KAT files for additional tests.</li>
+<li>Add experimental HMAC support based on examples from
+<a class="reference external" href="http://www.di-mgt.com.au/hmac_sha3_testvectors.html">http://www.di-mgt.com.au/hmac_sha3_testvectors.html</a> . HMAC-SHA-3 isn't
+standardized yet and disabled unless the module is compiled with
+SHA3_HMAC_SUPPORT flag.</li>
+<li>Test hashing of unaligned data.</li>
+<li>Add ISO C11 memset_s() function as _Py_memset_s() in order to securely
+wipe memory that holds sensitive data. The page
+<a class="reference external" href="https://www.securecoding.cert.org/confluence/display/seccode/MSC06-C.+Be+aware+of+compiler+optimization+when+dealing+with+sensitive+data">https://www.securecoding.cert.org/confluence/display/seccode/MSC06-C.+Be+aware+of+compiler+optimization+when+dealing+with+sensitive+data</a>
+explains the motivation for memset_s().</li>
+<li>Add tox support</li>
+<li>Add _capacity_bits and _rate_bits attributes for diagnostic purposes</li>
+<li>Add SHA3_0 support and sha3_0.squeeze(lenght, hex=False) method for
+arbitrary-length sponge squeezing. SHA3_0 uses a capacity of 1024 and a rate
+of 576.</li>
+</ul>
+</div>
+<div class="section" id="pysha3-0-3">
+<h2>pysha3 0.3</h2>
+<p><em>Release date: 14-Oct-2012</em></p>
+<ul class="simple">
+<li>Fix 64bit big endian support</li>
+<li>Add workaround for alignment error on 64bit SPARC machine by using the opt32
+implementation.</li>
+<li>block_size now returns NotImplemented to prevent users from using pysha3
+with the hmac module.</li>
+</ul>
+</div>
+<div class="section" id="pysha3-0-2-2">
+<h2>pysha3 0.2.2</h2>
+<p><em>Release date: 07-Oct-2012</em></p>
+<ul class="simple">
+<li>Re-add brg_endian.h to fix issue on Solaris (big endian platform)</li>
+</ul>
+</div>
+<div class="section" id="pysha3-0-2-1">
+<h2>pysha3 0.2.1</h2>
+<p><em>Release date: 06-Oct-2012</em></p>
+<ul class="simple">
+<li>Fix MANIFEST.in to include Makefile and tests.py</li>
+<li>Add setup.py test command with hack for inplace builds</li>
+<li>Enhance README.txt and fixed its markup</li>
+</ul>
+</div>
+<div class="section" id="pysha3-0-2">
+<h2>pysha3 0.2</h2>
+<p><em>Release date: 06-Oct-2012</em></p>
+<ul class="simple">
+<li>Change directory struct to use the same directory layout as Python 3.4.</li>
+<li>Remove C++ comments from Keccak sources for ANSI C compatibility.</li>
+<li>Declare all Keccak functions and globals as static to avoid name clashes.</li>
+<li>Remove alias sha3() for sha3_512().</li>
+<li>Add block_size attribute. Keccak has a internal sponge size of 1600 bits.</li>
+<li>Release GIL around SHA3_update() calls.</li>
+<li>Monkey patch the hashlib module to support, e.g. hashlib.sha3_512() and
+hashlib.new(&quot;sha3_512&quot;)</li>
+<li>Release GIL around SHA3_update() when the data exceeds a certain size.</li>
+<li>Fix build on platforms with an unsigned 64bit integer type (uint64_t). The
+module falls back to 32bit implementation of Keccak with interleave tables.</li>
+</ul>
+</div>
+<div class="section" id="pysha3-0-1">
+<h2>pysha3 0.1</h2>
+<p><em>Release date: 04-Oct-2012</em></p>
+<ul class="simple">
+<li>first release</li>
+<li>based on KeccakReferenceAndOptimized-3.2.zip</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

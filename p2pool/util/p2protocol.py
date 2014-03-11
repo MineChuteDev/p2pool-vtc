@@ -8,6 +8,8 @@ import struct
 from twisted.internet import protocol
 from twisted.python import log
 
+import max_hash
+
 import p2pool
 from p2pool.util import datachunker, variable
 
@@ -91,7 +93,7 @@ class Protocol(protocol.Protocol):
         payload = type_.pack(payload2)
         if len(payload) > self._max_payload_length:
             raise TooLong('payload too long')
-        data = self._message_prefix + struct.pack('<12sI', command, len(payload)) + hashlib.sha256(hashlib.sha256(payload).digest()).digest()[:4] + payload
+        data = self._message_prefix + struct.pack('<12sI', command, len(payload)) + max_hash(max_hash(payload).digest()).digest()[:4] + payload
         self.traffic_happened.happened('p2p/out', len(data))
         self.transport.write(data)
     

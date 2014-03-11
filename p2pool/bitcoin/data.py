@@ -3,6 +3,7 @@ from __future__ import division
 import hashlib
 import random
 import warnings
+import sys
 
 import p2pool
 from p2pool.util import math, pack

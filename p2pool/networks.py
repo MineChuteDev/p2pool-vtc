@@ -123,6 +123,27 @@ nets = dict(
         VERSION_WARNING=lambda v: 'Upgrade Terracoin to >= 0.8.0.1!' if v < 80001 else None,
     ),
 
+    maxcoin=math.Object(
+        PARENT=networks.nets['maxcoin'],
+        SHARE_PERIOD=10,
+        NEW_SHARE_PERIOD=10, # seconds target spacing
+        CHAIN_LENGTH=24*60*60//30,
+        REAL_CHAIN_LENGTH=24*60*60//30,
+        TARGET_LOOKBEHIND=200,
+        SPREAD=15,
+        NEW_SPREAD=15, # blocks
+        IDENTIFIER='8c75636b79212121'.decode('hex'),
+        PREFIX='8a60193ab8b9617f'.decode('hex'),
+        P2P_PORT=8560,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=9560,
+        BOOTSTRAP_ADDRS='us-east1.cryptovein.com'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-max',
+        VERSION_CHECK=lambda v: True,
+    ),
+
     vertcoin=math.Object(
         PARENT=networks.nets['vertcoin'],
         SHARE_PERIOD=15, # seconds
