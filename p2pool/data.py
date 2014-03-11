@@ -12,6 +12,7 @@ import p2pool
 from p2pool.bitcoin import data as bitcoin_data, script, sha256
 from p2pool.util import math, forest, pack
 
+
 # hashlink
 
 hash_link_type = pack.ComposedType([
@@ -31,6 +32,7 @@ def check_hash_link(hash_link, data, const_ending=''):
     extra = (hash_link['extra_data'] + const_ending)[len(hash_link['extra_data']) + len(const_ending) - extra_length:]
     assert len(extra) == extra_length
     return pack.IntType(256).unpack(hashlib.sha256(sha256.sha256(data, (hash_link['state'], extra, 8*hash_link['length'])).digest()).digest())
+
 
 # shares
 

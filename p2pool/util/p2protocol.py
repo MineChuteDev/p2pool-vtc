@@ -11,7 +11,9 @@ from twisted.python import log
 import max_hash
 
 import p2pool
-from p2pool.util import datachunker, variable
+from p2pool.util import datachunker, variable, pack
+
+from p2pool.bitcoin import data as bitcoin_data
 
 class TooLong(Exception):
     pass
@@ -23,7 +25,7 @@ class Protocol(protocol.Protocol):
         self.dataReceived2 = datachunker.DataChunker(self.dataReceiver())
         self.traffic_happened = traffic_happened
         self.ignore_trailing_payload = ignore_trailing_payload
-    
+
     def dataReceived(self, data):
         self.traffic_happened.happened('p2p/in', len(data))
         self.dataReceived2(data)
@@ -41,8 +43,8 @@ class Protocol(protocol.Protocol):
                 continue
             checksum = yield 4
             payload = yield length
-            
-            if hashlib.sha256(hashlib.sha256(payload).digest()).digest()[:4] != checksum:
+
+            if bitcoin_data.nethash(payload)[:4] != checksum:
                 print 'invalid hash for', self.transport.getPeer().host, repr(command), length, checksum.encode('hex')
                 if p2pool.DEBUG:
                     print hashlib.sha256(hashlib.sha256(payload).digest()).digest()[:4].encode('hex'), payload.encode('hex')
@@ -89,11 +91,12 @@ class Protocol(protocol.Protocol):
         type_ = getattr(self, 'message_' + command, None)
         if type_ is None:
             raise ValueError('invalid command')
-        #print 'SEND', command, repr(payload2)[:500]
+        print 'SEND', command, repr(payload2)[:500]
         payload = type_.pack(payload2)
         if len(payload) > self._max_payload_length:
             raise TooLong('payload too long')
-        data = self._message_prefix + struct.pack('<12sI', command, len(payload)) + max_hash(max_hash(payload).digest()).digest()[:4] + payload
+        data = self._message_prefix + struct.pack('<12sI', command, len(payload)) + \
+            bitcoin_data.nethash(payload)[:4] + payload
         self.traffic_happened.happened('p2p/out', len(data))
         self.transport.write(data)
     

@@ -8,6 +8,29 @@ import sys
 import p2pool
 from p2pool.util import math, pack
 
+import max_hash
+
+from binascii import unhexlify, hexlify
+
+from pprint import pprint
+
+
+# protocol hash function
+#def hashmax(data):
+#    return pack.IntType(256).unpack(__import__('max_hash').getPoWHash(__import('max_hash').getPoWHash(data)))
+#    return pack.IntType(256).unpack(max_hash.getPoWHash(max_hash.getPoWHash(data)))
+
+def nethash(data):
+
+    #print "HASH debug"
+    #data = '700000005d385ba114d079970b29a9418fd0549e7d68a95c7f168621a314201000000000578586d149fd07b22f3a8a347c516de7052f034d2b76ff68e0d6ecff9b77a45489e3fd511732011df0731000';
+    #pprint(data)
+    #print hexlify(max_hash.getPoWHash(data))
+
+    ###hashlib.sha256(hashlib.sha256(data).digest()).digest()
+
+    return max_hash.getPoWHash(data)
+
 def hash256(data):
     return pack.IntType(256).unpack(hashlib.sha256(hashlib.sha256(data).digest()).digest())
 
@@ -17,7 +40,7 @@ def hash160(data):
     return pack.IntType(160).unpack(hashlib.new('ripemd160', hashlib.sha256(data).digest()).digest())
 
 class ChecksummedType(pack.Type):
-    def __init__(self, inner, checksum_func=lambda data: hashlib.sha256(hashlib.sha256(data).digest()).digest()[:4]):
+    def __init__(self, inner, checksum_func=lambda data: nethash(data)[:4]):
         self.inner = inner
         self.checksum_func = checksum_func
     
