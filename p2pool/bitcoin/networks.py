@@ -185,14 +185,14 @@ nets = dict(
     ),
       rotocoin=math.Object(
         P2P_PREFIX='xxxxxxx'.decode('hex'),
-        P2P_PORT=xxxx,
+        P2P_PORT=28820,
         ADDRESS_VERSION=xx,
         RPC_PORT=28800,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'rotocoinaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),
-        SUBSIDY_FUNC=lambda height: 2*100000000,
+        SUBSIDY_FUNC=lambda height: 2*100000000 >> (height + 1)//18000,
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('vtc_scrypt').getPoWHash(data)),
         BLOCK_PERIOD=288, # s
         SYMBOL='Rt2',
