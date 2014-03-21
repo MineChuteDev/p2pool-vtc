@@ -125,7 +125,7 @@ nets = dict(
     ),
         rotocoin=math.Object(
         PARENT=networks.nets['rotocoin'],
-        SHARE_PERIOD=15, # seconds
+        SHARE_PERIOD=30, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
         REAL_CHAIN_LENGTH=24*60*60//10, # shares
         TARGET_LOOKBEHIND=200, # shares
