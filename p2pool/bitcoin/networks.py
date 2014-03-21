@@ -187,7 +187,7 @@ nets = dict(
         P2P_PREFIX='xxxxxxx'.decode('hex'),
         P2P_PORT=xxxx,
         ADDRESS_VERSION=xx,
-        RPC_PORT=xxxx,
+        RPC_PORT=28800,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'rotocoinaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
