@@ -184,9 +184,9 @@ nets = dict(
         DUST_THRESHOLD=0.03e8,
     ),
       rotocoin=math.Object(
-        P2P_PREFIX='xxxxxxx'.decode('hex'),
+        P2P_PREFIX='fabfb5da'.decode('hex'),
         P2P_PORT=28820,
-        ADDRESS_VERSION=xx,
+        ADDRESS_VERSION=61,
         RPC_PORT=28800,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'rotocoinaddress' in (yield bitcoind.rpc_help()) and
