@@ -205,7 +205,28 @@ nets = dict(
         DUMB_SCRYPT_DIFF=2**16,
         DUST_THRESHOLD=0.03e8,
     ),                                                                                                                                                                         
-    
+        h2ocoin=math.Object(
+        P2P_PREFIX='xxxx'.decode('hex'),
+        P2P_PORT=xxxx,
+        ADDRESS_VERSION=xxx,
+        RPC_PORT=xxxxxx,
+        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
+            'h2ocoinaddress' in (yield bitcoind.rpc_help()) and
+            not (yield bitcoind.rpc_getinfo())['testnet']
+        )),
+        SUBSIDY_FUNC=lambda height: 1600*100000000,
+        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('vtc_scrypt').getPoWHash(data)),
+        BLOCK_PERIOD=60, # s
+        SYMBOL='H2O',
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'],
+            'h2ocoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/h2ocoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.h2ocoin'), 'h2ocoin.conf'),
+        BLOCK_EXPLORER_URL_PREFIX='http://cryptexplorer.com/block/',
+        ADDRESS_EXPLORER_URL_PREFIX='http://cryptexplorer.com/address/',
+        TX_EXPLORER_URL_PREFIX='http://cryptexplorer.com/tx/',
+        SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+        DUMB_SCRYPT_DIFF=2**16,
+        DUST_THRESHOLD=0.03e8,
+    ),    
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name
