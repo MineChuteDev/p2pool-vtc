@@ -141,7 +141,24 @@ nets = dict(
         ANNOUNCE_CHANNEL='#p2pool-roto',
         VERSION_CHECK=lambda v: True,
     ),
-                                                                                                                                            
+        h20coin=math.Object(
+        PARENT=networks.nets['h20coin'],
+        SHARE_PERIOD=30, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=12, # blocks
+        IDENTIFIER='7761746572776174'.decode('hex'),
+        PREFIX='7761746572776174'.decode('hex'),
+        P2P_PORT=6833,
+        MIN_TARGET=4,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=6832,
+        BOOTSTRAP_ADDRS='freebtc.eu'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-h20',
+        VERSION_CHECK=lambda v: True,
+    ),                                                                                                                                        
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name
