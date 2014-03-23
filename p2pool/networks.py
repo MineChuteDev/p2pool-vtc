@@ -141,8 +141,8 @@ nets = dict(
         ANNOUNCE_CHANNEL='#p2pool-roto',
         VERSION_CHECK=lambda v: True,
     ),
-        h20coin=math.Object(
-        PARENT=networks.nets['h20coin'],
+        h2ocoin=math.Object(
+        PARENT=networks.nets['h2ocoin'],
         SHARE_PERIOD=10, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
         REAL_CHAIN_LENGTH=24*60*60//10, # shares
@@ -156,7 +156,7 @@ nets = dict(
         PERSIST=False,
         WORKER_PORT=6832,
         BOOTSTRAP_ADDRS='freebtc.eu'.split(' '),
-        ANNOUNCE_CHANNEL='#p2pool-h20',
+        ANNOUNCE_CHANNEL='#p2pool-h2o',
         VERSION_CHECK=lambda v: True,
     ),                                                                                                                                        
 )
