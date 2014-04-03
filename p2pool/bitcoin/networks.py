@@ -183,7 +183,7 @@ nets = dict(
         DUMB_SCRYPT_DIFF=2**16,
         DUST_THRESHOLD=0.03e8,
     ),
-      rotocoin=math.Object(
+    rotocoin=math.Object(
         P2P_PREFIX='fabfb5da'.decode('hex'),
         P2P_PORT=28820,
         ADDRESS_VERSION=61,
@@ -205,10 +205,10 @@ nets = dict(
         DUMB_SCRYPT_DIFF=2**16,
         DUST_THRESHOLD=0.03e8,
     ),                                                                                                                                                                         
-        h2ocoin=math.Object(
-        P2P_PREFIX='fabfb5da'.decode('hex'),
+    h2ocoin=math.Object(
+        P2P_PREFIX='defacedd'.decode('hex'),
         P2P_PORT=9912,
-        ADDRESS_VERSION=41,
+        ADDRESS_VERSION=40,
         RPC_PORT=9911,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'address' in (yield bitcoind.rpc_help()) and
